@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<style>
+    .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/Images/8006147.jpg') no-repeat center center;
+        background-size: cover;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+    .cta-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+        }
+
+    .features {
+        display: flex;
+        justify-content: space-around;
+        padding: 3rem 0;
+    }
+
+    .feature {
+        text-align: center;
+        padding: 1rem;
+        width: 25%;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+    }
+
+        .feature.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            margin-bottom: 0.5rem;
+        }
+
+    .latest-news {
+        background-color: #f4f4f4;
+        padding: 3rem 0;
+    }
+
+    .news-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+    }
+
+    .news-item {
+        width: 30%;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 5px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+        }
+
+    .news-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .news-content {
+        padding: 1rem;
+    }
+
+        .news-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+    @@keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+
+<div class="hero">
+    <div>
+        <h1>Chào mừng đến với Football Manager Pro</h1>
+        <p>Quản lý đội bóng của bạn và dẫn dắt họ đến vinh quang</p>
+        <a href="@Url.Action("Register", "Account")" class="cta-button">Bắt đầu ngay</a>
+    </div>
+</div>
+
+<section class="features">
+    <div class="feature">
+        <i class="fas fa-users"></i>
+        <h3>Quản lý Đội bóng</h3>
+        <p>Xây dựng và quản lý đội hình của bạn với các cầu thủ hàng đầu.</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-trophy"></i>
+        <h3>Giải đấu</h3>
+        <p>Tham gia các giải đấu hấp dẫn và giành chiến thắng.</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-chart-line"></i>
+        <h3>Phân tích</h3>
+        <p>Sử dụng công cụ phân tích tiên tiến để cải thiện hiệu suất đội bóng.</p>
+    </div>
+</section>
+
+<section class="latest-news">
+    <h2 class="text-center">Tin tức mới nhất</h2>
+    <div class="news-container">
+        <div class="news-item">
+            <div class="news-image" style="background-image: url('/Images/Welcomback-Ronaldo.jpg');"></div>
+            <div class="news-content">
+                <h3>Chuyển nhượng mùa hè</h3>
+                <p>Cập nhật những thông tin chuyển nhượng nóng nhất mùa hè này.</p>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-image" style="background-image: url('/Images/lich-thi-dau-c1-1.jpg'); "></div>
+            <div class="news-content">
+                <h3>Lịch thi đấu mới</h3>
+                <p>Lịch thi đấu mùa giải mới đã được công bố. Xem ngay!</p>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-image" style="background-image: url('/Images/Ronaldo1.jpg'); "></div>
+            <div class="news-content">
+                <h3>Cầu thủ xuất sắc</h3>
+                <p>Điểm qua những cầu thủ xuất sắc nhất tháng vừa qua.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Animation for features
+            $(window).scroll(function () {
+                $('.feature').each(function () {
+                    var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+                    var bottom_of_window = $(window).scrollTop() + $(window).height();
+                    if (bottom_of_window > bottom_of_object) {
+                        $(this).addClass('visible');
+                    }
+                });
+            });
+        });
+    </script>
+}

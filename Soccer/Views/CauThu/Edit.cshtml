@@ -1,0 +1,96 @@
+﻿@model Soccer.Models.CauThu
+
+@{
+    ViewBag.Title = "Sửa thông tin cầu thủ";
+}
+
+<h2 class="text-center mb-4">Sửa thông tin cầu thủ</h2>
+
+@using (Html.BeginForm("Edit", "CauThu", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="container">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MaCauThu)
+
+    <div class="form-group row mb-3">
+        @Html.LabelFor(model => model.Ho, "Họ", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ho, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        @Html.LabelFor(model => model.Ten, "Tên", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        @Html.LabelFor(model => model.NgaySinh, "Ngày sinh", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.NgaySinh, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        @Html.LabelFor(model => model.QuocTich, "Quốc tịch", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.QuocTich, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.QuocTich, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        @Html.LabelFor(model => model.ViTri, "Vị trí", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.ViTri, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ViTri, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        @Html.LabelFor(model => model.SoAo, "Số áo", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.EditorFor(model => model.SoAo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SoAo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        @Html.LabelFor(model => model.MaDoi, "Đội bóng", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.DropDownList("MaDoi", null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MaDoi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label class="col-sm-2 col-form-label">Hình ảnh hiện tại</label>
+        <div class="col-sm-10">
+            <img src="@Model.HinhAnh" alt="@Model.Ho @Model.Ten" class="img-thumbnail" style="max-width: 200px;" />
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label class="col-sm-2 col-form-label">Thay đổi hình ảnh</label>
+        <div class="col-sm-10">
+            <input type="file" name="hinhAnh" id="hinhAnh" class="form-control-file" />
+            @Html.HiddenFor(model => model.HinhAnh)
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary ml-2" })
+        </div>
+    </div>
+</div>
+}

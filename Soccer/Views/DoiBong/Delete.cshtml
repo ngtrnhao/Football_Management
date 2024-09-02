@@ -1,0 +1,53 @@
+﻿@model Soccer.Models.DoiBong
+
+@{
+    ViewBag.Title = "Xóa đội bóng";
+}
+
+<h2>Xóa đội bóng</h2>
+
+<h3>Bạn có chắc chắn muốn xóa đội bóng này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Logo</dt>
+        <dd>
+            <img src="@Model.Logo" alt="@Model.TenDoi" style="width:100px;" />
+        </dd>
+
+        <dt>Tên đội</dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenDoi)
+        </dd>
+
+        <dt>Thành phố</dt>
+        <dd>
+            @Html.DisplayFor(model => model.ThanhPho)
+        </dd>
+
+        <dt>Sân nhà</dt>
+        <dd>
+            @Html.DisplayFor(model => model.SanVanDong.TenSan)
+        </dd>
+
+        <dt>Năm thành lập</dt>
+        <dd>
+            @Html.DisplayFor(model => model.NamThanhLap)
+        </dd>
+
+        <dt>Giải đấu</dt>
+        <dd>
+            @Html.DisplayFor(model => model.GiaiDau.TenGiaiDau)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại danh sách", "Index")
+        </div>
+    }
+</div>

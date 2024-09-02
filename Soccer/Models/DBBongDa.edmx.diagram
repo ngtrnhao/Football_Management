@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8d4fd69b1ba04a3bb425310a62b8ccaf" Name="Diagram1">
+        <EntityTypeShape EntityType="QlyBongDa1Model.BangXepHang" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.CauThu" Width="1.5" PointX="5.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.ChanThuong" Width="1.5" PointX="7.5" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.ChuyenNhuong" Width="1.5" PointX="7.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.DoiBong" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.DoiHinhTranDau" Width="1.5" PointX="10.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.GiaiDau" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.HuanLuyenVien" Width="1.5" PointX="5.25" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.LichThiDau" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.NhanVien" Width="1.5" PointX="1.5" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.SanVanDong" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.SuKienTranDau" Width="1.5" PointX="10.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.ThongKeTranDau" Width="1.5" PointX="10.5" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.TranDau" Width="1.5" PointX="8.25" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QlyBongDa1Model.TrongTai" Width="1.5" PointX="6" PointY="31" IsExpanded="true" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__BangXepHa__MaDoi__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__BangXepHa__MaGia__02084FDA" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__CauThu__MaDoi__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__ChanThuon__MaCau__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__ChuyenNhu__MaCau__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__DoiHinhTr__MaCau__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__SuKienTra__MaCau__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__SuKienTra__MaCau__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__SuKienTra__MaCau__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__ThongKeTr__MaCau__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__ChuyenNhu__MaDoi__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__ChuyenNhu__MaDoi__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__DoiBong__MaGiaiD__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__DoiBong__MaSanNh__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__DoiHinhTr__MaDoi__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__HuanLuyen__MaDoi__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__LichThiDa__MaDoi__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__LichThiDa__MaDoi__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__SuKienTra__MaDoi__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__ThongKeTr__MaDoi__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__TranDau__MaDoiKh__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__TranDau__MaDoiNh__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__DoiHinhTr__MaTra__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__GiaiDau__HinhAnh__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__LichThiDa__MaGia__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__TranDau__MaGiaiD__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__LichThiDa__MaSan__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__LichThiDa__MaTra__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__TranDau__MaSan__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__SuKienTra__MaTra__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__ThongKeTr__MaTra__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="QlyBongDa1Model.FK__TranDau__MaTrong__656C112C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

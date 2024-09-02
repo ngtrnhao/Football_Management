@@ -1,0 +1,36 @@
+﻿<!-- Views/SanVanDong/Details.cshtml -->
+@model Soccer.Models.SanVanDong
+
+@{
+    ViewBag.Title = "Chi tiết Sân Vận Động";
+}
+
+<h2>Chi tiết Sân Vận Động</h2>
+
+<div class="card">
+    <div class="card-header">
+        <h3>@Html.DisplayFor(model => model.TenSan)</h3>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Thành Phố</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.ThanhPho)</dd>
+
+            <dt class="col-sm-3">Sức Chứa</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.SucChua)</dd>
+
+            <dt class="col-sm-3">Năm Xây Dựng</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.NamXayDung)</dd>
+
+            <dt class="col-sm-3">Địa Chỉ</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.DiaChi)</dd>
+
+            <dt class="col-sm-3">Mô Tả</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MoTa)</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.MaSan }, new { @class = "btn btn-warning" })
+        @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@model Tuple<List<Soccer.Models.DoiHinhTranDau>, List<Soccer.Models.DoiHinhTranDau>>
+@{
+    ViewBag.Title = "Đội hình trận đấu";
+}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Đội hình trận đấu</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">@ViewBag.DoiNha</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Số áo</th>
+                                <th>Vị trí</th>
+                                <th>Tên cầu thủ</th>
+                                <th>Đội hình</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Item1)
+                            {
+                                <tr>
+                                    <td>@item.CauThu.SoAo</td>
+                                    <td>@item.CauThu.ViTri</td>
+                                    <td>@item.CauThu.Ho @item.CauThu.Ten</td>
+                                    <td>@((item.LaDoi11Chinh ?? false) ? "Chính" : "Dự bị")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">@ViewBag.DoiKhach</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Số áo</th>
+                                <th>Vị trí</th>
+                                <th>Tên cầu thủ</th>
+                                <th>Đội hình</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Item2)
+                            {
+                                <tr>
+                                    <td>@item.CauThu.SoAo</td>
+                                    <td>@item.CauThu.ViTri</td>
+                                    <td>@item.CauThu.Ho @item.CauThu.Ten</td>
+                                    <td>@((item.LaDoi11Chinh ?? false) ? "Chính" : "Dự bị")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Details", new { id = ViewBag.MaTran })" class="btn btn-primary">
+            Quay lại chi tiết trận đấu
+        </a>
+    </div>
+</div>

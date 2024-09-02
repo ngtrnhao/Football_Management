@@ -1,0 +1,48 @@
+﻿@model Soccer.Models.CauThu
+
+@{
+    ViewBag.Title = "Xóa cầu thủ";
+}
+
+<h2>Xóa cầu thủ</h2>
+
+<h3>Bạn có chắc chắn muốn xóa cầu thủ này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Hình ảnh</dt>
+        <dd>
+            <img src="@Model.HinhAnh" alt="@Model.Ho @Model.Ten" style="width:100px;" />
+        </dd>
+
+        <dt>Họ tên</dt>
+        <dd>@Model.Ho @Model.Ten</dd>
+
+        <dt>Ngày sinh</dt>
+        <dd>@String.Format("{0:yyyy-MM-dd}", Model.NgaySinh)</dd>
+
+
+        <dt>Quốc tịch</dt>
+        <dd>@Html.DisplayFor(model => model.QuocTich)</dd>
+
+        <dt>Vị trí</dt>
+        <dd>@Html.DisplayFor(model => model.ViTri)</dd>
+
+        <dt>Số áo</dt>
+        <dd>@Html.DisplayFor(model => model.SoAo)</dd>
+
+        <dt>Đội bóng</dt>
+        <dd>@Html.DisplayFor(model => model.DoiBong.TenDoi)</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.MaCauThu)
+
+        <div class="form-group">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>

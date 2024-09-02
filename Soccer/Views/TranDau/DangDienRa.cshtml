@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Soccer.Models.TranDau>
+@{
+    ViewBag.Title = "Trận đấu đang diễn ra";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Trận đấu đang diễn ra</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Giải đấu</th>
+                    <th>Đội nhà</th>
+                    <th>Đội khách</th>
+                    <th>Sân vận động</th>
+                    <th>Tỉ số đội nhà</th>
+                    <th>Tỉ số đội khách</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.GiaiDau.TenGiaiDau</td>
+                        <td>@item.DoiBong.TenDoi</td>
+                        <td>@item.DoiBong1.TenDoi</td>
+                        <td>@item.SanVanDong.TenSan</td>
+                        <td>@item.TiSoDoiNha</td>
+                        <td>@item.TiSoDoiKhach</td>
+                        <td>
+                            <a href="@Url.Action("ChinhSuaDangDienRa", new { id = item.MaTran })" class="btn btn-primary btn-sm">Chỉnh sửa</a>
+                            <a href="@Url.Action("ThemSuKien", new { id = item.MaTran })" class="btn btn-info btn-sm">Thêm sự kiện</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

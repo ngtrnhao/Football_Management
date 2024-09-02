@@ -1,0 +1,396 @@
+﻿@model Soccer.Models.TranDau
+@{
+    ViewBag.Title = "Tạo đội hình";
+}
+
+<style>
+    .team-section {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .team-name {
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+
+    .player-list {
+        height: 300px;
+        overflow-y: auto;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+    }
+
+    .player-item {
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+        .player-item:hover {
+            background-color: #e9ecef;
+        }
+
+    .selected-players {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    #createLineup {
+        margin-top: 20px;
+    }
+
+    .pitch {
+        width: 100%;
+        height: 600px;
+        background-color: #3a7d3a;
+        position: relative;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+
+    .player-position {
+        width: 60px;
+        height: 80px;
+        background-color: #333;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+        .player-position::after {
+            content: "+";
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 20px;
+        }
+
+        .player-position::before {
+            content: "4";
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+</style>
+
+<div class="container">
+    <h2 class="text-center mb-4">@ViewBag.Title</h2>
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="formationSelect">Chọn sơ đồ đội hình:</label>
+                <select id="formationSelect" class="form-control">
+                    <option value="4-4-2">4-4-2</option>
+                    <option value="4-3-3">4-3-3</option>
+                    <option value="4-2-3-1">4-2-3-1</option>
+                    <option value="3-5-2">3-5-2</option>
+                    <option value="5-3-2">5-3-2</option>
+                    <option value="3-4-3">3-4-3</option>
+                </select>
+            </div>
+            <div class="pitch">
+                <!-- Các vị trí trên sân sẽ được tạo động bằng JavaScript -->
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="playerList" class="player-list">
+                <!-- Danh sách cầu thủ sẽ được hiển thị ở đây -->
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <button id="createLineup" class="btn btn-primary btn-lg">Tạo đội hình</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
+    <script>
+
+    $(document).ready(function() {
+        var players = @Html.Raw(Json.Encode(ViewBag.CauThuDoiNha));
+        var selectedPlayers = {};
+        var currentPosition = '';
+        function getPositionsForFormation(formation) {
+            var formations = {
+                "4-4-2": ["GK", "LB", "LCB", "RCB", "RB", "LM", "LCM", "RCM", "RM", "LS", "RS"],
+                "4-3-3": ["GK", "LB", "LCB", "RCB", "RB", "CDM", "LCM", "RCM", "LW", "ST", "RW"],
+                "4-2-3-1": ["GK", "LB", "LCB", "RCB", "RB", "LDM", "RDM", "LAM", "CAM", "RAM", "ST"],
+                "3-5-2": ["GK", "LCB", "CB", "RCB", "LWB", "LCM", "CDM", "RCM", "RWB", "LS", "RS"],
+                "5-3-2": ["GK", "LWB", "LCB", "CB", "RCB", "RWB", "LCM", "CDM", "RCM", "LS", "RS"],
+                "3-4-3": ["GK", "LCB", "CB", "RCB", "LM", "LCM", "RCM", "RM", "LW", "ST", "RW"]
+            };
+            return formations[formation] || [];
+        }
+
+        function updateFormation() {
+            var formation = $('#formationSelect').val();
+            var positions = getPositionsForFormation(formation);
+
+            $('.pitch').empty();
+            positions.forEach(function (pos) {
+                var top, left;
+                switch (formation) {
+                    case "4-4-2":
+                        switch (pos) {
+                            case "GK": top = "85%"; left = "50%"; break;
+                            case "LB": top = "70%"; left = "15%"; break;
+                            case "RB": top = "70%"; left = "85%"; break;
+                            case "LM": top = "45%"; left = "15%"; break;
+                            case "RM": top = "45%"; left = "85%"; break;
+                           
+                            // Các vị trí còn lại có thể được thêm vào đây
+                            case "LCB": top = "70%"; left = "35%"; break;
+                            case "RCB": top = "70%"; left = "65%"; break;
+                            case "LCM": top = "45%"; left = "35%"; break;
+                            case "RCM": top = "45%"; left = "65%"; break;
+                            case "LS": top = "15%"; left = "35%"; break;
+                            case "RS": top = "15%"; left = "65%"; break;
+                        }
+                        break;
+                    case "4-3-3":
+                        switch (pos) {
+                            case "GK": top = "85%"; left = "50%"; break;
+                            case "LB": top = "70%"; left = "20%"; break;
+                            case "LCB": top = "70%"; left = "40%"; break;
+                            case "RCB": top = "70%"; left = "60%"; break;
+                            case "RB": top = "70%"; left = "80%"; break;
+                            case "CDM": top = "55%"; left = "50%"; break;
+                            case "LCM": top = "45%"; left = "35%"; break;
+                            case "RCM": top = "45%"; left = "65%"; break;
+                            case "LW": top = "25%"; left = "20%"; break;
+                            case "ST": top = "20%"; left = "50%"; break;
+                            case "RW": top = "25%"; left = "80%"; break;
+                        }
+                        break;
+                    case "4-2-3-1":
+                        switch (pos) {
+                            case "GK": top = "85%"; left = "50%"; break;
+                            case "LB": top = "70%"; left = "20%"; break;
+                            case "LCB": top = "70%"; left = "40%"; break;
+                            case "RCB": top = "70%"; left = "60%"; break;
+                            case "RB": top = "70%"; left = "80%"; break;
+                            case "LDM": top = "55%"; left = "40%"; break;
+                            case "RDM": top = "55%"; left = "60%"; break;
+                            case "LAM": top = "35%"; left = "30%"; break;
+                            case "CAM": top = "30%"; left = "50%"; break;
+                            case "RAM": top = "35%"; left = "70%"; break;
+                            case "ST": top = "15%"; left = "50%"; break;
+                        }
+                        break;
+                    case "3-5-2":
+                        switch (pos) {
+                            case "GK": top = "85%"; left = "50%"; break;
+                            case "LCB": top = "70%"; left = "30%"; break;
+                            case "CB": top = "75%"; left = "50%"; break;
+                            case "RCB": top = "70%"; left = "70%"; break;
+                            case "LWB": top = "55%"; left = "15%"; break;
+                            case "LCM": top = "45%"; left = "35%"; break;
+                            case "CDM": top = "55%"; left = "50%"; break;
+                            case "RCM": top = "45%"; left = "65%"; break;
+                            case "RWB": top = "55%"; left = "85%"; break;
+                            case "LS": top = "20%"; left = "35%"; break;
+                            case "RS": top = "20%"; left = "65%"; break;
+                        }
+                        break;
+                    case "5-3-2":
+                        switch (pos) {
+                            case "GK": top = "85%"; left = "50%"; break;
+                            case "LWB": top = "65%"; left = "15%"; break;
+                            case "LCB": top = "70%"; left = "30%"; break;
+                            case "CB": top = "75%"; left = "50%"; break;
+                            case "RCB": top = "70%"; left = "70%"; break;
+                            case "RWB": top = "65%"; left = "85%"; break;
+                            case "LCM": top = "45%"; left = "35%"; break;
+                            case "CDM": top = "50%"; left = "50%"; break;
+                            case "RCM": top = "45%"; left = "65%"; break;
+                            case "LS": top = "20%"; left = "35%"; break;
+                            case "RS": top = "20%"; left = "65%"; break;
+                        }
+                        break;
+                    case "3-4-3":
+                        switch (pos) {
+                            case "GK": top = "85%"; left = "50%"; break;
+                            case "LCB": top = "70%"; left = "30%"; break;
+                            case "CB": top = "75%"; left = "50%"; break;
+                            case "RCB": top = "70%"; left = "70%"; break;
+                            case "LM": top = "50%"; left = "20%"; break;
+                            case "LCM": top = "50%"; left = "40%"; break;
+                            case "RCM": top = "50%"; left = "60%"; break;
+                            case "RM": top = "50%"; left = "80%"; break;
+                            case "LW": top = "25%"; left = "25%"; break;
+                            case "ST": top = "20%"; left = "50%"; break;
+                            case "RW": top = "25%"; left = "75%"; break;
+                        }
+                        break;
+                }
+                $('.pitch').append('<div class="player-position" data-position="' + pos + '" style="top: ' + top + '; left: ' + left + ';">' + pos + '</div>');
+            });
+        }
+                
+
+                function getPositionsForFormation(formation) {
+                    var formations = {
+                        "4-4-2": ["GK", "LB", "LCB", "RCB", "RB", "LM", "LCM", "RCM", "RM", "LS", "RS"],
+                        "4-3-3": ["GK", "LB", "LCB", "RCB", "RB", "CDM", "LCM", "RCM", "LW", "ST", "RW"],
+                        "3-5-2": ["GK", "LCB", "CB", "RCB", "LWB", "LCM", "CDM", "RCM", "RWB", "LS", "RS"],
+                        "4-2-3-1": ["GK", "LB", "LCB", "RCB", "RB", "LDM", "RDM", "LAM", "CAM", "RAM", "ST"],
+                        "5-3-2": ["GK", "LWB", "LCB", "CB", "RCB", "RWB", "LCM", "CM", "RCM", "LS", "RS"]
+                    };
+                    return formations[formation] || [];
+                }
+        
+
+    
+
+        function sortPlayersByPosition(position) {
+            return players.sort(function(a, b) {
+                if (a.ViTri === position && b.ViTri !== position) return -1;
+                if (a.ViTri !== position && b.ViTri === position) return 1;
+                return 0;
+            });
+        }
+
+        function displayPlayerList(position) {
+            var sortedPlayers = sortPlayersByPosition(position);
+            var html = '<h4>Chọn cầu thủ cho vị trí ' + position + '</h4>';
+            sortedPlayers.forEach(function(player) {
+                if (!selectedPlayers[player.MaCauThu]) {
+                    html += '<div class="player-item" data-id="' + player.MaCauThu + '" data-position="' + player.ViTri + '">'
+                         + player.Ten + ' ' + player.Ho + ' (' + player.ViTri + ')</div>';
+                }
+            });
+            $('#playerList').html(html);
+        }
+
+        function selectPlayer(playerId, playerName, playerPosition) {
+            // Kiểm tra xem vị trí đã có cầu thủ chưa
+            if (selectedPlayers[currentPosition]) {
+                // Nếu có, remove cầu thủ cũ khỏi selectedPlayers
+                delete selectedPlayers[selectedPlayers[currentPosition].id];
+            }
+
+            // Thêm cầu thủ mới vào selectedPlayers
+            selectedPlayers[currentPosition] = { id: playerId, name: playerName, position: playerPosition };
+
+            // Cập nhật hiển thị trên sân
+            var positionElement = $('.player-position[data-position="' + currentPosition + '"]');
+            positionElement.html(playerName + '<br>(' + playerPosition + ')');
+            positionElement.attr('title', playerName);
+        }
+        $('#formationSelect').change(updateFormation);
+
+        $(document).on('click', '.player-position', function() {
+            currentPosition = $(this).data('position');
+            displayPlayerList(currentPosition);
+        });
+        $(document).on('click', '.player-item', function () {
+            var playerId = $(this).data('id');
+            var playerName = $(this).text();
+            var playerPosition = $(this).data('position');
+            selectPlayer(playerId, playerName, playerPosition);
+            displayPlayerList(currentPosition);
+        });
+        $('#createLineup').click(function() {
+            var lineup = Object.values(selectedPlayers).map(function(player) {
+                return {
+                    MaCauThu: player.id,
+                    ViTri: player.position,
+                    LaDoi11Chinh: true
+                };
+            });
+
+            substitutes.forEach(function(player) {
+                lineup.push({
+                    MaCauThu: player.id,
+                    ViTri: player.position,
+                    LaDoi11Chinh: false
+                });
+            });
+
+            $.ajax({
+                url: '@Url.Action("TaoDoiHinh", "TranDau", new { id = Model.MaTran })',
+                type: 'POST',
+                data: JSON.stringify({ doiHinh: lineup }),
+                contentType: 'application/json',
+                success: function(response) {
+                    if (response.success) {
+                        alert('Đội hình đã được tạo thành công!');
+                        window.location.href = '@Url.Action("DoiHinh", "TranDau", new { id = Model.MaTran })';
+                    } else {
+                        alert('Có lỗi xảy ra: ' + response.message);
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra khi gửi yêu cầu.');
+                }
+            });
+        });
+        var substitutes = [];
+        var maxSubstitutes = 7;
+
+        function displaySubstituteList() {
+            var html = '<h4>Chọn cầu thủ dự bị (tối đa ' + maxSubstitutes + ')</h4>';
+            players.forEach(function (player) {
+                if (!selectedPlayers[player.MaCauThu] && substitutes.length < maxSubstitutes) {
+                    html += '<div class="substitute-item" data-id="' + player.MaCauThu + '" data-position="' + player.ViTri + '">'
+                        + player.Ten + ' ' + player.Ho + ' (' + player.ViTri + ')</div>';
+                }
+            });
+            $('#substituteList').html(html);
+        }
+
+        $(document).on('click', '.substitute-item', function () {
+            var playerId = $(this).data('id');
+            var playerName = $(this).text();
+            var playerPosition = $(this).data('position');
+
+            if (substitutes.length < maxSubstitutes) {
+                substitutes.push({ id: playerId, name: playerName, position: playerPosition });
+                $(this).remove();
+                updateSubstituteDisplay();
+            }
+        });
+
+        function updateSubstituteDisplay() {
+            var html = '<h4>Cầu thủ dự bị đã chọn:</h4>';
+            substitutes.forEach(function (player) {
+                html += '<div>' + player.name + ' (' + player.position + ')</div>';
+            });
+            $('#selectedSubstitutes').html(html);
+        }
+        function displayPlayerList(position) {
+            var sortedPlayers = sortPlayersByPosition(position);
+            var html = '<h4>Chọn cầu thủ cho vị trí ' + position + '</h4>';
+            sortedPlayers.forEach(function (player) {
+                html += '<div class="player-item" data-id="' + player.MaCauThu + '" data-position="' + player.ViTri + '">'
+                    + player.Ten + ' ' + player.Ho + ' (' + player.ViTri + ')</div>';
+            });
+            $('#playerList').html(html);
+        }
+        $(document).on('click', '.player-item', function () {
+            var playerId = $(this).data('id');
+            var playerName = $(this).text();
+            var playerPosition = $(this).data('position');
+            selectPlayer(playerId, playerName, playerPosition);
+            updateAvailablePlayers();
+            displayPlayerList(currentPosition);
+        });
+        // Khởi tạo ban đầu
+        updateFormation();
+    });
+    </script>
+}

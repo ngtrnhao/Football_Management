@@ -1,0 +1,72 @@
+﻿@model Soccer.Models.CauThu
+@{
+    ViewBag.Title = "Chi tiết cầu thủ";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Chi tiết cầu thủ</h2>
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">@Model.Ten @Model.Ho</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center mb-3">
+                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                    {
+                        <img src="@Url.Content(Model.HinhAnh)" alt="@Model.Ten @Model.Ho" class="img-fluid rounded-circle" style="max-width: 200px; max-height: 200px;" />
+                    }
+                    else
+                    {
+                        <img src="/images/default-player.png" alt="Default Player" class="img-fluid rounded-circle" style="max-width: 200px; max-height: 200px;" />
+                    }
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th style="width: 30%;">Ngày sinh:</th>
+                            <td>@Model.NgaySinh.ToString()</td>
+                        </tr>
+                        <tr>
+                            <th>Quốc tịch:</th>
+                            <td>@Model.QuocTich</td>
+                        </tr>
+                        <tr>
+                            <th>Vị trí:</th>
+                            <td>@Model.ViTri</td>
+                        </tr>
+                        <tr>
+                            <th>Số áo:</th>
+                            <td><span class="badge badge-primary">@Model.SoAo</span></td>
+                        </tr>
+                        <tr>
+                            <th>Đội bóng:</th>
+                            <td>@Model.DoiBong.TenDoi</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="@Url.Action("Edit", new { id = Model.MaCauThu })" class="btn btn-warning mr-2">
+                <i class="fas fa-edit"></i> Sửa
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                <i class="fas fa-list"></i> Trở lại danh sách
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .table th {
+            font-weight: bold;
+            color: #495057;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+}

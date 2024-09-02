@@ -1,0 +1,96 @@
+﻿@model Soccer.Models.TranDau
+@{
+    ViewBag.Title = "Tạo trận đấu mới";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Tạo trận đấu mới</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="card">
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.MaGiaiDau, "Giải đấu", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.DropDownList("MaGiaiDau", null, "-- Chọn giải đấu --", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaGiaiDau, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.MaDoiNha, "Đội nhà", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.DropDownList("MaDoiNha", null, "-- Chọn đội nhà --", new { @class = "form-control", id = "MaDoiNha" })
+                        @Html.ValidationMessageFor(model => model.MaDoiNha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.MaDoiKhach, "Đội khách", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.DropDownList("MaDoiKhach", null, "-- Chọn đội khách --", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaDoiKhach, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.MaSan, "Sân vận động", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.DropDownList("MaSan", null, "-- Chọn sân vận động --", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaSan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.ThoiGianDuKien, "Thời gian dự kiến", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        <input type="datetime-local" id="ThoiGianDuKien" name="ThoiGianDuKien" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.ThoiGianDuKien, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.TrangThai, "Trạng thái", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.DropDownListFor(model => model.TrangThai, ViewBag.TrangThai as SelectList, "-- Chọn trạng thái --", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    @Html.LabelFor(model => model.MaTrongTaiChinh, "Trọng tài chính", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+                    <div class="col-sm-9">
+                        @Html.DropDownList("MaTrongTaiChinh", null, "-- Chọn trọng tài chính --", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaTrongTaiChinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-9 offset-sm-3">
+                        <button type="submit" class="btn btn-primary">Tạo mới</button>
+                        @Html.ActionLink("Trở về danh sách", "Index", null, new { @class = "btn btn-secondary ml-2" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Lưu trữ tất cả các tùy chọn ban đầu của đội khách
+            var allAwayTeamOptions = $('#MaDoiKhach > option').clone();
+
+            $('#MaDoiNha').change(function () {
+                var selectedHomeTeam = $(this).val();
+
+                // Reset đội khách về danh sách ban đầu
+                $('#MaDoiKhach').empty().append(allAwayTeamOptions.clone());
+
+                // Loại bỏ đội đã chọn làm đội nhà khỏi danh sách đội khách
+                $('#MaDoiKhach option[value="' + selectedHomeTeam + '"]').remove();
+
+                // Nếu đội khách hiện tại trùng với đội nhà vừa chọn, reset lựa chọn
+                if ($('#MaDoiKhach').val() === selectedHomeTeam) {
+                    $('#MaDoiKhach').val('');
+                }
+            });
+        });
+    </script>
+}

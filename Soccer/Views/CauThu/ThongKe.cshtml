@@ -1,0 +1,44 @@
+﻿@model Soccer.Models.CauThu
+
+@{
+    ViewBag.Title = "Thống kê Cầu thủ";
+}
+
+<h2>Thống kê Cầu thủ: @Model.Ho @Model.Ten</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SoBanThang)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoBanThang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoKienTao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoKienTao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoTheVang)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoTheVang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoTheDo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoTheDo)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaCauThu }) |
+    @Html.ActionLink("Quay lại Danh sách", "Index")
+</p>

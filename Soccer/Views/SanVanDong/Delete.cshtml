@@ -1,0 +1,59 @@
+﻿
+@model Soccer.Models.SanVanDong
+
+@{
+    ViewBag.Title = "Xóa Sân Vận Động";
+}
+
+<h2>Xóa Sân Vận Động</h2>
+
+<div class="alert alert-danger">
+    <h3>Bạn có chắc chắn muốn xóa sân vận động này?</h3>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4>@Html.DisplayFor(model => model.TenSan)</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Thành Phố</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.ThanhPho)</dd>
+
+            <dt class="col-sm-3">Sức Chứa</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.SucChua)</dd>
+
+            <dt class="col-sm-3">Năm Xây Dựng</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.NamXayDung)</dd>
+
+            <dt class="col-sm-3">Địa Chỉ</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.DiaChi)</dd>
+
+            <dt class="col-sm-3">Mô Tả</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.MoTa)</dd>
+        </dl>
+    </div>
+    <div class="card-footer">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function (e) {
+                var confirmDelete = confirm("Bạn có chắc chắn muốn xóa sân vận động này không?");
+                if (!confirmDelete) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

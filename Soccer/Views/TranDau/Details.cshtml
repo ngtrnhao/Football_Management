@@ -1,0 +1,99 @@
+﻿@model Soccer.Models.TranDau
+@{
+    ViewBag.Title = "Chi tiết trận đấu";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">@ViewBag.Title</h2>
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">@Model.DoiBong.TenDoi vs @Model.DoiBong1.TenDoi</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 border-right">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title text-primary mb-0"><i class="fas fa-info-circle mr-2"></i>Thông tin chung</h5>
+                        <h5 class="card-title text-primary mb-0"><i class="fas fa-chart-line mr-2"></i>Tỉ số</h5>
+                    </div>
+                    <dl class="row">
+                        <dt class="col-sm-4"><i class="fas fa-trophy mr-2"></i>Giải đấu</dt>
+                        <dd class="col-sm-8">@Model.GiaiDau.TenGiaiDau</dd>
+
+                        <dt class="col-sm-4"><i class="fas fa-home mr-2"></i>Đội nhà</dt>
+                        <dd class="col-sm-8">@Model.DoiBong.TenDoi</dd>
+
+                        <dt class="col-sm-4"><i class="fas fa-plane mr-2"></i>Đội khách</dt>
+                        <dd class="col-sm-8">@Model.DoiBong1.TenDoi</dd>
+
+                        <dt class="col-sm-4"><i class="fas fa-map-marker-alt mr-2"></i>Sân vận động</dt>
+                        <dd class="col-sm-8">@Model.SanVanDong.TenSan</dd>
+
+                        <dt class="col-sm-4"><i class="far fa-clock mr-2"></i>Thời gian</dt>
+                        <dd class="col-sm-8">@string.Format("{0:dd/MM/yyyy HH:mm}", Model.ThoiGianDuKien)</dd>
+
+                        <dt class="col-sm-4"><i class="fas fa-flag-checkered mr-2"></i>Trạng thái</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge @(Model.TrangThai == "Đang diễn ra" ? "badge-success" : "badge-secondary")">
+                                @Model.TrangThai
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center mt-4">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <img src="@Model.DoiBong.Logo" alt="@Model.DoiBong.TenDoi" class="img-fluid" style="max-height: 100px;">
+                                <h5 class="mt-2">@Model.DoiBong.TenDoi</h5>
+                            </div>
+                            <div class="col-4">
+                                <h1 class="display-4 font-weight-bold">
+                                    <span class="text-primary">@Model.TiSoDoiNha</span>
+                                    <span class="text-muted">-</span>
+                                    <span class="text-secondary">@Model.TiSoDoiKhach</span>
+                                </h1>
+                            </div>
+                            <div class="col-4">
+                                <img src="@Model.DoiBong1.Logo" alt="@Model.DoiBong1.TenDoi" class="img-fluid" style="max-height: 100px;">
+                                <h5 class="mt-2">@Model.DoiBong1.TenDoi</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-light">
+            <div class="d-flex justify-content-between">
+                @Html.ActionLink("Tạo đội hình", "TaoDoiHinh", new { id = Model.MaTran }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Sửa", "Edit", new { id = Model.MaTran }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+
+        .card-header {
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card-footer {
+            border-radius: 0 0 15px 15px;
+        }
+
+        .badge {
+            font-size: 100%;
+        }
+
+        .border-right {
+            border-right: 1px solid #dee2e6;
+        }
+    </style>
+}

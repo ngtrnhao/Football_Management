@@ -1,0 +1,35 @@
+﻿@model Soccer.Models.TrongTai
+@{
+    ViewBag.Title = "Chi Tiết Trọng Tài";
+}
+
+<h2 class="text-center mb-4">Chi Tiết Trọng Tài</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Thông Tin Trọng Tài</h4>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-3">Họ</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Ho)</dd>
+                        <dt class="col-sm-3">Tên</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.Ten)</dd>
+                        <dt class="col-sm-3">Ngày sinh</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.NgaySinh)</dd>
+                        <dt class="col-sm-3">Quốc tịch</dt>   
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.QuocTich)</dd>
+                        <dt class="col-sm-3">Kinh Nghiệm</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.SoNamKinhNghiem) năm</dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-center">
+                    @Html.ActionLink("Chỉnh Sửa", "Edit", new { id = Model.MaTrongTai }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Quay Lại Danh Sách", "Index", null, new { @class = "btn btn-secondary ml-2" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

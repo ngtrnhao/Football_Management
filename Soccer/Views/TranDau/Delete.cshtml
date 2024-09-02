@@ -1,0 +1,56 @@
+﻿@model Soccer.Models.TranDau
+@{
+    ViewBag.Title = "Xóa trận đấu";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">@ViewBag.Title</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-danger">Bạn có chắc chắn muốn xóa trận đấu này?</h3>
+            <table class="table table-borderless">
+                <tr>
+                    <th>Mã trận:</th>
+                    <td>@Html.DisplayFor(model => model.MaTran)</td>
+                </tr>
+                <tr>
+                    <th>Giải đấu:</th>
+                    <td>@Html.DisplayFor(model => model.GiaiDau.TenGiaiDau)</td>
+                </tr>
+                <tr>
+                    <th>Đội nhà:</th>
+                    <td>@Html.DisplayFor(model => model.DoiBong.TenDoi)</td>
+                </tr>
+                <tr>
+                    <th>Đội khách:</th>
+                    <td>@Html.DisplayFor(model => model.DoiBong1.TenDoi)</td>
+                </tr>
+                <tr>
+                    <th>Sân vận động:</th>
+                    <td>@Html.DisplayFor(model => model.SanVanDong.TenSan)</td>
+                </tr>
+                <tr>
+                    <th>Thời gian dự kiến:</th>
+                    <td>@Html.DisplayFor(model => model.ThoiGianDuKien)</td>
+                </tr>
+                <tr>
+                    <th>Trạng thái:</th>
+                    <td>@Html.DisplayFor(model => model.TrangThai)</td>
+                </tr>
+                <tr>
+                    <th>Tỉ số:</th>
+                    <td>@Html.DisplayFor(model => model.TiSoDoiNha) - @Html.DisplayFor(model => model.TiSoDoiKhach)</td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-danger">Xóa</button>
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+            }
+        </div>
+    </div>
+</div>

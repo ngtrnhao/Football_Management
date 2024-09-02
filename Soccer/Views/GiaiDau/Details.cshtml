@@ -1,0 +1,41 @@
+﻿@model Soccer.Models.GiaiDau
+@{
+    ViewBag.Title = "Chi tiết Giải đấu";
+}
+<div class="container mt-4">
+    <h2 class="mb-4">Chi tiết Giải đấu</h2>
+    <div class="card">
+        <div class="card-header">
+            <h4>@Html.DisplayFor(model => model.TenGiaiDau)</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-3">Quốc gia</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.QuocGia)</dd>
+
+                        <dt class="col-sm-3">Mùa giải</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.MuaGiai)</dd>
+
+                        <dt class="col-sm-3">Ngày bắt đầu</dt>
+                        <dd class="col-sm-9">@(Model.NgayBatDau.HasValue ? Model.NgayBatDau.Value.ToString("dd/MM/yyyy") : "Chưa xác định")</dd>
+
+                        <dt class="col-sm-3">Ngày kết thúc</dt>
+                        <dd class="col-sm-9">@(Model.NgayKetThuc.HasValue ? Model.NgayKetThuc.Value.ToString("dd/MM/yyyy") : "Chưa xác định")</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                    {
+                        <img src="@Url.Content(Model.HinhAnh)" alt="@Model.TenGiaiDau" class="img-fluid rounded"  style="max-width: 200px; max-height: 200px; object-fit: contain;"/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaGiaiDau }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Trở về danh sách", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>

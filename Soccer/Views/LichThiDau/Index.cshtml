@@ -1,0 +1,127 @@
+﻿@model IEnumerable<IGrouping<DateTime, Soccer.Models.LichThiDau>>
+
+<div class="schedule-container">
+    @foreach (var group in Model)
+    {
+        <div class="date-group">
+            <h2>@group.Key.ToString("dddd dd MMMM yyyy")</h2>
+
+            @foreach (var match in group)
+            {
+                <div class="match">
+                    <div class="team home-team">
+                        <span>@match.DoiBong.TenDoi</span>
+                        @if (!string.IsNullOrEmpty(match.DoiBong.Logo))
+                        {
+                            <img src="@Url.Content(match.DoiBong.Logo)" alt="@match.DoiBong.TenDoi logo">
+                        }
+                    </div>
+
+                    <div class="match-info">
+                        @if (match.TrangThai == "Chưa diễn ra")
+                        {
+                            <div class="match-time">@match.ThoiGianDuKien.Value.ToString("HH:mm")</div>
+                        }
+                        else
+                        {
+                            <div class="match-score">
+                                <span>@match.TiSoDoiNha - @match.TiSoDoiKhach</span>
+                                @if (match.TrangThai == "Đang diễn ra")
+                                {
+                                    <span class="live-indicator">Live</span>
+                                }
+                            </div>
+                        }
+                    </div>
+
+                    <div class="team away-team">
+                        @if (!string.IsNullOrEmpty(match.DoiBong1.Logo))
+                        {
+                            <img src="@Url.Content(match.DoiBong1.Logo)" alt="@match.DoiBong1.TenDoi logo">
+                        }
+                        <span>@match.DoiBong1.TenDoi</span>
+                    </div>
+                </div>
+
+                <div class="venue">Venue: @match.SanVanDong.TenSan</div>
+            }
+        </div>
+    }
+</div>
+<style>
+    .schedule-container {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .date-group {
+        margin-bottom: 30px;
+    }
+
+        .date-group h2 {
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+    .match {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .team {
+        display: flex;
+        align-items: center;
+        width: 40%;
+    }
+
+    .home-team {
+        justify-content: flex-end;
+        text-align: right;
+    }
+
+    .away-team {
+        justify-content: flex-start;
+    }
+
+    .team img {
+        width: 30px;
+        height: 30px;
+        margin: 0 10px;
+    }
+
+    .match-info {
+        text-align: center;
+        width: 20%;
+    }
+
+    .match-time {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .match-score {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .live-indicator {
+        color: red;
+        font-size: 12px;
+        margin-left: 5px;
+    }
+
+    .venue {
+        text-align: center;
+        color: #666;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+</style>

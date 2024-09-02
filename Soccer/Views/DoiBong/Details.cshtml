@@ -1,0 +1,42 @@
+﻿@model Soccer.Models.DoiBong
+@{
+    ViewBag.Title = "Chi tiết đội bóng";
+}
+
+<h2 class="text-center mb-4">Chi tiết đội bóng</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="@Model.Logo" alt="@Model.TenDoi" class="img-fluid img-thumbnail mb-3" style="max-width: 200px;" />
+                    </div>
+                    <div class="col-md-8">
+                        <dl class="row">
+                            <dt class="col-sm-4">Tên đội</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.TenDoi)</dd>
+
+                            <dt class="col-sm-4">Thành phố</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.ThanhPho)</dd>
+
+                            <dt class="col-sm-4">Sân nhà</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.SanVanDong.TenSan)</dd>
+
+                            <dt class="col-sm-4">Năm thành lập</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.NamThanhLap)</dd>
+
+                            <dt class="col-sm-4">Giải đấu</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.GiaiDau.TenGiaiDau)</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                @Html.ActionLink("Sửa", "Edit", new { id = Model.MaDoi }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+</div>

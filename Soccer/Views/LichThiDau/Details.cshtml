@@ -1,0 +1,98 @@
+﻿@model Soccer.Models.LichThiDau
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LichThiDau</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLich)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaLich)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaTran)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaTran)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaGiaiDau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaGiaiDau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaDoiNha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaDoiNha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaDoiKhach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaDoiKhach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianDuKien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianDuKien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiSoDoiNha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiSoDoiNha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiSoDoiKhach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiSoDoiKhach)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

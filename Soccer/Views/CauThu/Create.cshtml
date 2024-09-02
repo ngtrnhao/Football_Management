@@ -1,0 +1,92 @@
+﻿@model Soccer.Models.CauThu
+
+@{
+    ViewBag.Title = "Thêm mới Cầu thủ";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Thêm mới Cầu thủ</h2>
+
+    @using (Html.BeginForm("Create", "CauThu", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Ho, "Họ", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ" } })
+                    @Html.ValidationMessageFor(model => model.Ho, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Ten, "Tên", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập tên" } })
+                    @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.NgaySinh, "Ngày sinh", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.QuocTich, "Quốc tịch", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.QuocTich, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập quốc tịch" } })
+                    @Html.ValidationMessageFor(model => model.QuocTich, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.ViTri, "Vị trí", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ViTri, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập vị trí" } })
+                    @Html.ValidationMessageFor(model => model.ViTri, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.SoAo, "Số áo", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.SoAo, new { htmlAttributes = new { @class = "form-control", type = "number", min = "1", max = "99" } })
+                    @Html.ValidationMessageFor(model => model.SoAo, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.MaDoi, "Đội bóng", new { @class = "form-label" })
+                    @Html.DropDownList("MaDoi", null, "-- Chọn đội bóng --", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaDoi, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.HinhAnh, "Hình ảnh", new { @class = "form-label" })
+                    <input type="file" name="hinhAnh" id="hinhAnh" class="form-control" accept="image/*" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary">Thêm mới</button>
+            @Html.ActionLink("Trở về danh sách", "Index", null, new { @class = "btn btn-secondary ms-2" })
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        // Custom validation for file input
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                var fileInput = $('#hinhAnh');
+                var file = fileInput[0].files[0];
+                if (file) {
+                    var fileSize = file.size / 1024 / 1024; // in MB
+                    if (fileSize > 5) {
+                        alert('Kích thước file không được vượt quá 5MB');
+                        event.preventDefault();
+                    }
+                }
+            });
+        });
+    </script>
+}

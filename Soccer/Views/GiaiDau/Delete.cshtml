@@ -1,0 +1,59 @@
+﻿@model Soccer.Models.GiaiDau
+@{
+    ViewBag.Title = "Xóa Giải đấu";
+}
+<div class="container mt-4">
+    <h2 class="mb-4">Xóa Giải đấu</h2>
+    <div class="alert alert-danger">
+        <h4>Bạn có chắc chắn muốn xóa giải đấu này?</h4>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4>Thông tin Giải đấu</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-4">Tên Giải đấu</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.TenGiaiDau)</dd>
+
+                        <dt class="col-sm-4">Quốc gia</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.QuocGia)</dd>
+
+                        <dt class="col-sm-4">Mùa giải</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.MuaGiai)</dd>
+
+                        <dt class="col-sm-4">Ngày bắt đầu</dt>
+                        <dd class="col-sm-8">@(Model.NgayBatDau.HasValue ? Model.NgayBatDau.Value.ToString("dd/MM/yyyy") : "Chưa xác định")</dd>
+
+                        <dt class="col-sm-4">Ngày kết thúc</dt>
+                        <dd class="col-sm-8">@(Model.NgayKetThuc.HasValue ? Model.NgayKetThuc.Value.ToString("dd/MM/yyyy") : "Chưa xác định")</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                    {
+                        <div class="text-center">
+                            <img src="@Url.Content(Model.HinhAnh)" alt="@Model.TenGiaiDau" class="img-fluid rounded" style="max-width: 200px; max-height: 200px; object-fit: contain;" />
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center">Không có hình ảnh</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+                    @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

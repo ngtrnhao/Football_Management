@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Soccer.Models.TranDau>
+
+@{
+    ViewBag.Title = "Danh sách trận đấu";
+}
+
+<div class="row mb-4 align-items-center">
+    <div class="col-md-6 mb-2 mb-md-0">
+        <a href="@Url.Action("Create")" class="btn btn-primary mr-2">
+            <i class="fas fa-plus-circle mr-1"></i> Tạo mới
+        </a>
+        <a href="@Url.Action("DangDienRa")" class="btn btn-info">
+            <i class="fas fa-running mr-1"></i> Trận đang diễn ra
+        </a>
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("Index", "TranDau", FormMethod.Get, new { @class = "form-inline justify-content-md-end" }))
+        {
+            <div class="input-group">
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Tìm kiếm..." })
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped shadow-sm">
+        <thead class="thead-light">
+            <tr>
+                <th><i class="fas fa-trophy mr-1"></i> Giải đấu</th>
+                <th><i class="fas fa-home mr-1"></i> Đội nhà</th>
+                <th><i class="fas fa-bus mr-1"></i> Đội khách</th>
+                <th><i class="fas fa-map-marker-alt mr-1"></i> Sân vận động</th>
+                <th><i class="far fa-clock mr-1"></i> Thời gian dự kiến</th>
+                <th><i class="fas fa-flag-checkered mr-1"></i> Trạng thái</th>
+                <th><i class="fas fa-chart-line mr-1"></i> Tỉ số</th>
+                <th><i class="fas fa-cogs mr-1"></i> Thao tác</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.GiaiDau.TenGiaiDau)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DoiBong.TenDoi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DoiBong1.TenDoi)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SanVanDong.TenSan)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ThoiGianDuKien)</td>
+                    <td>
+                        <span class="badge @(item.TrangThai == "Đang diễn ra" ? "badge-success" : "badge-secondary")">
+                            @Html.DisplayFor(modelItem => item.TrangThai)
+                        </span>
+                    </td>
+                    <td><strong>@item.TiSoDoiNha - @item.TiSoDoiKhach</strong></td>
+                    <td>
+                        <div class="btn-group action-buttons" role="group">
+                            @RenderActionButton("Details", item.MaTran, "info", "eye", "Chi tiết")
+                            @RenderActionButton("Edit", item.MaTran, "warning", "pen", "Sửa")
+                            @RenderActionButton("Delete", item.MaTran, "danger", "trash", "Xóa")
+                            @if (item.TrangThai == "Đang diễn ra")
+                            {
+                                @RenderActionButton("ChinhSuaDangDienRa", item.MaTran, "success", "sync", "Cập nhật tỉ số")
+                            }
+                            @RenderActionButton("ThemSuKien", item.MaTran, "primary", "calendar-plus", "Thêm sự kiện")
+                            @RenderActionButton("DoiHinh", item.MaTran, "secondary", "users", "Đội hình")
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@RenderPagination()
+
+@helper RenderActionButton(string action, int id, string buttonClass, string iconClass, string title)
+{
+    <button onclick="location.href='@Url.Action(action, new { id = id })'" class="btn btn-@buttonClass btn-sm" data-toggle="tooltip" data-placement="top" title="@title">
+        <i class="fas fa-@iconClass"></i>
+    </button>
+}
+
+@helper RenderPagination()
+{
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">1 <span class="sr-only">(hiện tại)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+}
+
+@section Styles {
+    <style>
+        .action-buttons .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+            margin-right: 0.25rem;
+        }
+
+            .action-buttons .btn:last-child {
+                margin-right: 0;
+            }
+
+            .action-buttons .btn i {
+                font-size: 1rem;
+            }
+
+        .table th i {
+            opacity: 0.7;
+        }
+
+        .input-group .btn {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        
+    </style>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.table').hide().fadeIn(1000);
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+}
