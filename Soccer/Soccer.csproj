@@ -216,7 +216,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\8006147.jpg" />
     <Content Include="Images\Bannner\Banner.png" />
+    <Content Include="Images\football.png" />
     <Content Include="Images\lich-thi-dau-c1-1.jpg" />
+    <Content Include="Images\Logo\Logo_Real_Madrid.svg.png" />
+    <Content Include="Images\Logo\Man_Utd_FC_.svg.png" />
+    <Content Include="Images\player.jpg" />
+    <Content Include="Images\player1.png" />
     <Content Include="Images\Ronaldo.jpg" />
     <Content Include="Images\Ronaldo1.jpg" />
     <Content Include="Images\stadium.jpg" />
@@ -251,6 +256,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -315,7 +321,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\CauThu\" />
     <Folder Include="Images\GiaiDau\" />
-    <Folder Include="Images\Logo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
